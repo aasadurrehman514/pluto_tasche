@@ -1,0 +1,51 @@
+name: Test Cases execution using PyTest
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        python-version: [3.8]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Cache pip
+      uses: actions/cache@v2
+      with:
+        # This path is specific to Ubuntu
+        path: ~/.cache/pip
+                # if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        # Look to see if there is a cache hit for the corresponding requirements file
+        key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          ${{ runner.os }}-
+    - name: Installing binary dependencies
+      run: |
+        echo "wkhtmltopdf installation step"
+        sudo apt-get update -y
+        sudo apt-get install wget -y
+        sudo apt-get install xfonts-base -y
+        sudo apt-get install xfonts-75dpi -y
+        wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.focal_amd64.deb
+        sudo apt install ./wkhtmltox_0.12.6-1.focal_amd64.deb
+        wkhtmltopdf --version
+        wkhtmltoimage --version
+    - name: Installing Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Test with pytest
+      run: |
+        pytest
