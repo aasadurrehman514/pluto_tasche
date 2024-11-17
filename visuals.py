@@ -8,6 +8,8 @@ import sys
 
 def create_line_charts(df):
     
+    print('generating charts')
+    
     default_ratio = df['Defaults'].sum() / df['Obligators'].sum()
 
     for value,shocked_pd,rating in zip(df['Commulative_Obligators'],df['Beta_Inv'],df['Ratings']):

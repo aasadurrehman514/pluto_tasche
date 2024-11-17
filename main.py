@@ -8,28 +8,31 @@ import pdfkit
 import sys
 import time
 
-from data import calculate_default_ratio,calculate_commulative_obligators,calculate_commulative_defaults,calculate_probability_of_defaults,calculate_beta_distribution
+from data import calculate_default_ratio,calculate_commulative_obligators,calculate_commulative_defaults,calculate_probability_of_defaults,calculate_beta_distribution,create_portfolio_summary
 from visuals import create_line_charts
 
 
 def main():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--ratings', type=str, default = 'test_data.csv')
+    parser.add_argument('--portfolio', type=str, default = 'portfolio.json')
+    parser.add_argument('--mapping_file', type=str, default = 'config/ratings_map.csv')
     parser.add_argument('--confidence_interval', type=float, default = 0.75 )
 
     args = parser.parse_args()
     event = vars(args)
 
     start_time = datetime.now()
-
-    df = pd.read_csv(event['ratings'])
-
-    df = calculate_default_ratio(df)
-    df = calculate_commulative_obligators(df)
-    df = calculate_commulative_defaults(df)
-    df = calculate_probability_of_defaults(df)
-    df = calculate_beta_distribution(df,event)
+    portfolio = pd.read_json(event['portfolio'])
+    mapping_file = pd.read_csv(event['mapping_file'])
+    df = create_portfolio_summary(portfolio,mapping_file)
+ 
+    df = (df
+        .pipe(calculate_default_ratio)
+        .pipe(calculate_commulative_obligators)
+        .pipe(calculate_commulative_defaults)
+        .pipe(calculate_probability_of_defaults)
+        .pipe(calculate_beta_distribution, event))
 
     create_line_charts(df)
     generate_pdf_report(event,df)

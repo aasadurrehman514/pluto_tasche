@@ -1,5 +1,25 @@
 import pandas as pd
 import scipy.stats as stats
+import os
+
+
+def create_portfolio_summary(df,mapping_file):
+    summary = df.groupby("Ratings").agg(
+        Obligators=("Defaults", "count"),
+        Defaults=("Defaults", "sum")
+                        ).reset_index()
+
+    
+    result_df = pd.merge(summary, mapping_file, on="Ratings", how="left")
+    result_df.sort_values(by='mapped', ascending=True, inplace=True)
+
+    summary_file_path = "test_data.csv"
+
+    result_df.drop(columns=['mapped'], inplace=True)
+    result_df.to_csv(summary_file_path, index=False)
+    print("Summary saved")
+
+    return result_df
 
 
 def calculate_default_ratio(dr_df):
