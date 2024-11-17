@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+
+<style>
+    table.a {
+        width: auto;
+        table-layout: auto;
+        border-collapse: collapse;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .fixed {
+        table-layout: fixed;
+    }
+
+    th.a,
+    td.a {
+        padding: 5px;
+        border: solid 1px;
+        text-align: center;
+        border-collapse: collapse;
+    }
+
+    .underline {
+        border-bottom: 2px solid currentColor;
+    }
+
+    .green {
+        background-color: #2e8b57;
+    }
+
+    .blue {
+        background-color: #6393e0;
+    }
+
+    .red {
+        background-color: #ff0000;
+    }
+
+    .light {
+        background-color: #8de08b;
+    }
+
+    .yellow {
+        background-color: #ffee00;
+    }
+
+    .gray {
+        background-color: #a8a5a5;
+    }
+
+    .minuss {
+        color: red;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .plusss {
+        color: rgb(0, 0, 0);
+    }
+</style>
+
+<body>
+    <div style="text-align: center;">
+        <h1 style="text-align: center;"><span class="underline"><b>{{ title }}</b></span></h1>
+        </h2>
+
+        <body>
+            <h1>Data Table</h1>
+            <table>
+                <tr>
+                    {% for headers in representation_table.columns %}
+                        {% if headers == "index" %}
+                        <th></th>
+                        {% else %}
+                        <th style="color: navy; font-weight: bold;">{{ headers }}</th>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            </tr>
+            {% for rows in representation_table.values: %}
+            <tr>
+                {% for cell in rows %}
+                <td>{{cell}}</td>
+                {% endfor %} 
+            </tr>
+            {% endfor %}
+            </table></div></div>
+
+            <P style="page-break-before: always"></p>
+
+    <img src="{{ A1 }}" alt="unavailable" style="width:100%">
+    <img src="{{ A2 }}" alt="unavailable" style="width:100%">
+    <img src="{{ A3 }}" alt="unavailable" style="width:100%">
+    <img src="{{ AA1 }}" alt="unavailable" style="width:100%">
+    <img src="{{ AA2 }}" alt="unavailable" style="width:100%">
+    <img src="{{ AA3 }}" alt="unavailable" style="width:100%">
+    <img src="{{ AAA }}" alt="unavailable" style="width:100%">
+    <img src="{{ B1 }}" alt="unavailable" style="width:100%">
+    <img src="{{ B2 }}" alt="unavailable" style="width:100%">
+    <img src="{{ B3 }}" alt="unavailable" style="width:100%">
+    <img src="{{ BA1 }}" alt="unavailable" style="width:100%">
+    <img src="{{ BA2 }}" alt="unavailable" style="width:100%">
+    <img src="{{ BB3 }}" alt="unavailable" style="width:100%">
+    <img src="{{ BBB1 }}" alt="unavailable" style="width:100%">
+    <img src="{{ BBB2 }}" alt="unavailable" style="width:100%">
+    <img src="{{ C }}" alt="unavailable" style="width:100%">
+    <img src="{{ CA }}" alt="unavailable" style="width:100%">
+    <img src="{{ CAA1 }}" alt="unavailable" style="width:100%">
+    <img src="{{ CAA2 }}" alt="unavailable" style="width:100%">
+    <img src="{{ CAA3 }}" alt="unavailable" style="width:100%">
+                
+                
+
+</body>
+
+</html>

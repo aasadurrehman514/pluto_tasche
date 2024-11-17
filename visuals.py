@@ -3,6 +3,7 @@ import scipy.stats as stats
 import matplotlib.pyplot as plt
 import seaborn as sns
 import scipy.stats as stats
+import sys
 
 
 def create_line_charts(df):
@@ -33,14 +34,16 @@ def create_line_charts(df):
         plt.plot(df['trials'], df['PD'], label='PD', color='blue', marker='o')
         plt.plot(df['trials'], df['beta_PD'], label='beta_PD', color='red', marker='x')
 
-        plt.title(f"{rating} - Binomail Distribution")
+        plt.title(f"{rating} - Binomial Distribution")
         plt.xlabel('Trials')
         plt.ylabel('Values')
         plt.legend()
         plt.grid(True)
-        plt.savefig('results/{}'.format(f"{rating} - Binomail Distribution"))
+        plt.savefig('results/{}'.format(f"{rating} - Binomial Distribution"))
         plt.close()
-    print("plots saved in result folder")
+  
+    print(f'\rplots saved in result folder')
+
 
     return True
 
