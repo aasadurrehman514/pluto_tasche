@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        /* Table Styling */
+        table.a {
+            width: auto;
+            table-layout: auto;
+            border-collapse: collapse;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .fixed {
+            table-layout: fixed;
+        }
+
+        th.a,
+        td.a {
+            padding: 5px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+
+        th {
+            color: rgb(10, 10, 10);
+            font-weight: bold;
+        }
+
+        .underline {
+            border-bottom: 2px solid currentColor;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="text-align: center;">
+        <h1 class="underline"><b>{{ title }}</b></h1>
+
+
+    </div>
+
+
+
+    <div style="text-align: center;">
+        <img src="{{ A1 }}" alt="unavailable">
+        <img src="{{ A2 }}" alt="unavailable">
+        <img src="{{ A3 }}" alt="unavailable">
+        <img src="{{ AA1 }}" alt="unavailable">
+        <img src="{{ AA2 }}" alt="unavailable">
+        <img src="{{ AA3 }}" alt="unavailable">
+        <img src="{{ AAA }}" alt="unavailable">
+        <img src="{{ B1 }}" alt="unavailable">
+        <img src="{{ B2 }}" alt="unavailable">
+        <img src="{{ B3 }}" alt="unavailable">
+        <img src="{{ BA1 }}" alt="unavailable">
+        <img src="{{ BA2 }}" alt="unavailable">
+        <img src="{{ BB3 }}" alt="unavailable">
+        <img src="{{ BBB1 }}" alt="unavailable">
+        <img src="{{ BBB2 }}" alt="unavailable">
+        <img src="{{ C }}" alt="unavailable">
+        <img src="{{ CA }}" alt="unavailable">
+        <img src="{{ CAA1 }}" alt="unavailable">
+        <img src="{{ CAA2 }}" alt="unavailable">
+        <img src="{{ CAA3 }}" alt="unavailable">
+    </div>
+
+    <p style="page-break-before: always"></p>
+    <h2>Data Table</h2>
+    <table class="a">
+        <tr>
+            {% for headers in representation_table.columns %}
+            {% if headers == "index" %}
+            <th></th>
+            {% else %}
+            <th>{{ headers }}</th>
+            {% endif %}
+            {% endfor %}
+        </tr>
+
+        {% for rows in representation_table.values %}
+        <tr>
+            {% for cell in rows %}
+            <td>{{ cell }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+
+</html>
